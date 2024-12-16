@@ -9,7 +9,7 @@ let q = 0;
 
 for (x in colours) {
     for (y in numbers) {
-        deck.push(colours[x] + ' ' + String(numbers[y]));
+        deck.push(colours[x] + ' ' + numbers[y]);
         
     }
 }
@@ -18,21 +18,27 @@ let shuffle = () => {
         return Math.floor(Math.random() * (i + 1));
     }
 }
-do {
-    player1.push([deck[shuffle(z)]]);
-    z++;
-    deck.splice(z, 1);
+function dishOutCards(player1){
+    let z = 0;
+    do {
+        player1.push([deck[shuffle(z)]]);
+        z++;
+        deck.splice(z, 1);
+    }
+    while (z < 10);
+    return player1;
 }
-while (z < 10);
-console.log(player1);
 
-do {
-    npc.push([deck[shuffle(q)]]);
-    q++;
-    deck.splice(z, 1);
-}
-while (q < 10);
+let drawDeck = [];
+function drawPile(drawDeck){
+    for (let c = 0; c < deck.length; c++){
+        drawDeck.push([deck[shuffle(c)]]);
+        deck.splice(c, 1);
+    }
+    return drawDeck
+} 
+console.log(drawPile(deck))
+// console.log(deck.length)
 
-console.log('----------');
 
-console.log(npc);
+
